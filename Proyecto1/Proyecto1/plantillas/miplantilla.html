@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    {%include "superior/ barra.html"%}
+
+    <h2 style="color: red">Hola alumnos, estamos en la primera plantilla</h2>
+
+    {#No temas diseñador, ignora esta parte#} {%if nombre_persona.upper ==
+    "SERGIO"%}
+    <p>El curso lo imparte {{nombre_persona}}</p>
+
+    {%else%}
+    <p>El curso lo imparte el profesor suplente</p>
+    {%endif%}
+
+    <p>Mi nombre es {{nombre_persona | upper}} {{apellido_persona.upper}}</p>
+    <p>
+      Estamos viendo el tema de las plantillas a día
+      {{momento_actual.day}}/{{momento_actual.month}}/{{momento_actual.year}}
+    </p>
+    <h3>Temas del curso:</h3>
+    <ul>
+      {%if temas%} {% for elTema in temas%}
+      <li>{{elTema | first | lower}}</li>
+
+      {% endfor %} {%else%}
+      <p>No hay elementos que mostrar</p>
+      {%endif%}
+    </ul>
+    <p></p>
+  </body>
+</html>

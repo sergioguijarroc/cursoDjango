@@ -1,16 +1,31 @@
 from django.http import HttpResponse
 import datetime
+from django.shortcuts import render
+
+from django.template import Context, Template
+
+
+class Persona:
+    def __init__(self, nombre, apellido):
+        self._nombre = nombre
+        self._apellido = apellido
 
 
 def saludo(request):
-    documento = """
-        <html>
-        <body>
-        <h1>Hola alumnos esta es nuestra primera página</h1>
-        </body>
-        </html>"""
+    p1 = Persona("Sergio", "Guijarro")
 
-    return HttpResponse(documento)
+    temasDelCurso = ["Plantillas", "Modelos", "Formularios", "Vistas", "Despliegue"]
+
+    ahora = datetime.datetime.now()
+
+    diccionario = {
+        "nombre_persona": p1._nombre,
+        "apellido_persona": p1._apellido,
+        "momento_actual": ahora,
+        "temas": temasDelCurso,
+    }
+
+    return render(request, "miplantilla.html", diccionario)
 
 
 def despedida(request):
@@ -44,3 +59,9 @@ def calculaEdad(request, edad, agno):
         edadFutura,
     )
     return HttpResponse(documento)
+
+
+def cursoC(request):
+    fecha_actual = datetime.datetime.now()
+
+    return render(request, "CursoC.html", {"dameFecha": fecha_actual})
